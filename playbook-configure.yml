@@ -71,9 +71,9 @@
         - nginx
     
     - name: 'Get certificate'
-      command: '/usr/local/bin/certbot -n --nginx certonly -d {{ hostname }}'
+      command: '/usr/local/bin/certbot -n --nginx certonly -d techstarter.ddns.net'
       args:
-        creates: '/etc/letsencrypt/live/{{ hostname }}'
+        creates: '/etc/letsencrypt/live/techstarter.ddns.net'
       ignore_errors: true
       tags:
         - nginx
