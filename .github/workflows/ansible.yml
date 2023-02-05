@@ -44,5 +44,5 @@ jobs:
         - name: run playbook
           shell: bash
           env:
-            SSH_KEY: ${{secrets.PASSWORD_VAULT}}
-          run: ansible-playbook playbook-configure.yml -i hosts.yml -k
+            ANSIBLE_PASSWORD: ${{secrets.PASSWORD_VAULT}}
+          run: ansible-playbook playbook-configure.yml -i hosts.yml
