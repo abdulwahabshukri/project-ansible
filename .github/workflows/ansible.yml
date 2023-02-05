@@ -43,10 +43,10 @@ jobs:
             if [ -f test-requirements.txt ]; then pip install -r test-requirements.txt; fi
         - name: run playbook
           shell: bash
-          env:
-            SSH_KEY: ${{secrets.PASSWORD_VAULT}}
-          run: |
-            echo "$SSH_KEY" > sshkey
-            chmod 600 sshkey
-            ansible-playbook -i playbook-configure.yml hosts.yml
+         # env:
+        #    SSH_KEY: ${{secrets.PASSWORD_VAULT}}
+          run: ansible-playbook playbook-configure.yml -i hosts.yml
+          #  echo "$SSH_KEY" > sshkey
+          #  chmod 600 sshkey
+           # ansible-playbook playbook-configure.yml -i hosts.yml
             
