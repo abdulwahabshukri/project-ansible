@@ -43,4 +43,4 @@ jobs:
             if [ -f test-requirements.txt ]; then pip install -r test-requirements.txt; fi
         - name: run playbook
           shell: bash
-          run: ansible-playbook playbook-configure.yml -i hosts.yml -m ping -u azureuser --ask-pass
+          run: ansible-playbook playbook-configure.yml -i hosts.yml -k
