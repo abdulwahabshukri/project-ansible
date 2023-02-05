@@ -47,6 +47,35 @@
         echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
         https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
         /etc/apt/sources.list.d/jenkins.list > /dev/null
+        
+    - name: Install certbot
+      pip:
+        name:
+          - certbot
+          - certbot-nginx
+        executable: pip3
+      tags:
+        - nginx
+        - certbot
+
+    - name: Register certbot
+      shell: |
+        certbot -n register --agree-tos --email abdulwahab.shukri@student.techstarter.de
+        touch /etc/letsencrypt/.registered
+      args:
+        creates: /etc/letsencrypt/.registered
+      tags:
+        - nginx
+    
+    - name: 'Get certificate'
+      command: '/usr/local/bin/certbot -n --nginx certonly -d {{ jenkins_domain_name }}'
+      args:
+        creates: '/etc/letsencrypt/live/{{ jenkins_domain_name }}'
+      ignore_errors: true
+      tags:
+        - nginx
+        - certbot
+        
     - apt:
         update_cache: yes
         autoclean: yes
