@@ -45,7 +45,8 @@ jobs:
           shell: bash
           env:
             SSH_KEY: ${{secrets.PASSWORD_VAULT}}
-          run: ansible-playbook -i playbook-configure.yml hosts.yml
-          #  echo "$SSH_KEY" > sshkey
-         #   chmod 600 sshkey
+          run: |
+            echo "$SSH_KEY" > sshkey
+            chmod 600 sshkey
+            ansible-playbook -i playbook-configure.yml hosts.yml
             
