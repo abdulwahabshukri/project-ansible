@@ -68,9 +68,9 @@
         - nginx
     
     - name: 'Get certificate'
-      command: '/usr/local/bin/certbot -n --nginx certonly -d {{ jenkins_domain_name }}'
+      command: '/usr/local/bin/certbot -n --nginx certonly -d {{ hostname }}'
       args:
-        creates: '/etc/letsencrypt/live/{{ jenkins_domain_name }}'
+        creates: '/etc/letsencrypt/live/{{ hostname }}'
       ignore_errors: true
       tags:
         - nginx
