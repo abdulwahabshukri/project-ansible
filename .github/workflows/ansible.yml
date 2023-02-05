@@ -45,4 +45,4 @@ jobs:
           shell: bash
           env:
             ANSIBLE_PASSWORD: ${{secrets.PASSWORD_VAULT}}
-          run: ansible-playbook -i playbook-configure.yml hosts.yml, -u azureuser -k ${{secrets.PASSWORD_VAULT}}
+          run: ansible-playbook -i playbook-configure.yml hosts.yml, -u azureuser --ask-vault-pass
