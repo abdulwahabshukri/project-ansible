@@ -45,6 +45,6 @@ jobs:
           shell: bash
           
           run: |
-            echo "$SSH_KEY" > sshkey
-            chmod 600 sshkey
+            #echo "$SSH_KEY" > sshkey
+            #chmod 600 sshkey
             ansible-playbook playbook-configure.yml -i hosts.yml --ask-pass
