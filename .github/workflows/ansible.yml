@@ -30,7 +30,7 @@ jobs:
       # The validate Job need to be sucessfull
       needs: [ validate ]
       env: 
-        SSH_PASSWORD: ${{secrets.PASSWORD_VAULT}}
+        ANSIBLE_PASSWORD: ${{secrets.PASSWORD_VAULT}}
       steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v3
