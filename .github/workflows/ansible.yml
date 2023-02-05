@@ -29,6 +29,8 @@ jobs:
       runs-on: ubuntu-latest
       # The validate Job need to be sucessfull
       needs: [ validate ]
+      env: 
+        SSH_PASSWORD: ${{secrets.PASSWORD_VAULT}}
       steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v3
@@ -43,6 +45,4 @@ jobs:
             if [ -f test-requirements.txt ]; then pip install -r test-requirements.txt; fi
         - name: run playbook
           shell: bash
-        #  env:
-         #   ANSIBLE_PASSWORD: ${{secrets.PASSWORD_VAULT}}
-          run: ansible-playbook -i playbook-configure.yml hosts.yml --ask-become-pass
+          run: ansible-playbook -i playbook-configure.yml hosts.yml
