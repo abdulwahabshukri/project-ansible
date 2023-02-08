@@ -16,6 +16,7 @@
   tasks:
     - apt:
         name:
+            - default-jre
             - curl
             - nginx
             - docker.io
@@ -28,10 +29,14 @@
     - name: Add system user
       user:
         name: "deploy"
-        password: '*'
         append: yes
         groups: docker
 
+    - name: Set authorized key took from file
+      authorized_key:
+        user: deploy
+        state: present
+        key: "{{ lookup('file', './files/sshkey.pub') }}"
 - name: install java
   become: true
   hosts: jenkins
@@ -51,8 +56,6 @@
         update_cache: yes
         autoclean: yes
         name:
-            - default-jre
-            - default-jdk
             - jenkins
         state: present
 
@@ -65,7 +68,7 @@
         name: jenkins
         state: started
     - ansible.builtin.template:
-        src: jenkins.j2
+        src: files/jenkins.j2
         dest: /etc/nginx/sites-enabled/default
     - name: restart nginx
       ansible.builtin.service:
