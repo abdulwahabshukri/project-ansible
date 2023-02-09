@@ -52,7 +52,7 @@
         echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
         https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
         /etc/apt/sources.list.d/jenkins.list > /dev/null
-        
+
     - apt:
         update_cache: yes
         autoclean: yes
@@ -70,8 +70,3 @@
         state: started
     - ansible.builtin.template:
         src: files/jenkins.j2
-        dest: /etc/nginx/sites-enabled/default
-    - name: restart nginx
-      ansible.builtin.service:
-        name: nginx
-        state: restarted
